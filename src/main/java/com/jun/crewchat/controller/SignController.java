@@ -1,8 +1,8 @@
 package com.jun.crewchat.controller;
 
 import com.jun.crewchat.security.dto.AuthUserDTO;
-import com.jun.crewchat.user.User;
-import com.jun.crewchat.user.UserService;
+import com.jun.crewchat.service.user.UserDTO;
+import com.jun.crewchat.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -25,7 +25,7 @@ public class SignController {
     }
 
     @PostMapping("/sign-up")
-    public String signUp(User user) {
-        return userService.signUp(user);
+    public String signUp(UserDTO userDTO) {
+        return userService.signUp(userDTO);
     }
 }

@@ -1,4 +1,4 @@
-package com.jun.crewchat.user;
+package com.jun.crewchat.service.user;
 
 import com.jun.crewchat.security.dto.AuthUserDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,9 @@ public class UserService {
         return authUserDTO != null ? "main.html" : "sign.html";
     }
 
-    public String signUp(User user) {
+    public String signUp(UserDTO userDTO) {
+        log.info("UserDTO \n"+userDTO);
+        System.out.println(userDTO);
         return "redirect:/crewchat";
     }
 }

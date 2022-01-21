@@ -1,4 +1,4 @@
-package com.jun.crewchat.user;
+package com.jun.crewchat.service.user;
 
 public enum UserRole {
     USER, ADMIN

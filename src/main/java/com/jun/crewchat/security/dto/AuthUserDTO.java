@@ -11,7 +11,6 @@ import java.util.Map;
 
 @Getter
 @Setter
-@ToString
 public class AuthUserDTO extends User {
 
     private String email;

@@ -1,7 +1,16 @@
-package com.jun.crewchat.user;
+package com.jun.crewchat.service.user;
 
-import lombok.*;
-import lombok.experimental.SuperBuilder;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.jun.crewchat.service.base.DefaultEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,11 +19,10 @@ import java.util.Set;
 @MappedSuperclass
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
-@ToString
-public class User {
+@NoArgsConstructor
+@Slf4j
+public class User extends DefaultEntity {
 
     @Id
     protected String email;
@@ -33,7 +41,6 @@ public class User {
     protected boolean socialImg;
 
     @ElementCollection(fetch = FetchType.LAZY)
-    @Builder.Default
     private Set<UserRole> roleSet = new HashSet<>();
 
     public void addUserRole(UserRole userRole) {

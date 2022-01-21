@@ -1,4 +1,4 @@
-package com.jun.crewchat.user;
+package com.jun.crewchat.service.user;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

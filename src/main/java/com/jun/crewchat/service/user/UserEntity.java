@@ -1,9 +1,7 @@
-package com.jun.crewchat.user;
+package com.jun.crewchat.service.user;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,8 +10,6 @@ import javax.persistence.Table;
 @Table(name = "user")
 @Getter
 @Setter
-@NoArgsConstructor
-@SuperBuilder
 public class UserEntity extends User {
 
 }
