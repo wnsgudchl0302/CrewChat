@@ -21,11 +21,12 @@ import java.util.stream.Collectors;
 public class UserDetailService implements UserDetailsService {
 
     private final UserRepository userRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("UserDetailService loadUserByUsername : " + username);
         Optional<UserEntity> result = userRepository.findByEmail(username, false);
-        if(result.isEmpty()){
+        if (result.isEmpty()) {
             throw new UsernameNotFoundException("Check Email or Social");
         }
         User user = result.get();
@@ -35,11 +36,11 @@ public class UserDetailService implements UserDetailsService {
                 user.getPassword(),
                 user.isFromSocial(),
                 user.getRoleSet().stream()
-                        .map(role->new SimpleGrantedAuthority("ROLE_"+role.name())).collect(Collectors.toSet())
+                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name())).collect(Collectors.toSet())
         );
         userDTO.setName(user.getName());
         userDTO.setFromSocial(user.isFromSocial());
-        return  userDTO;
+        return userDTO;
 
     }
 }

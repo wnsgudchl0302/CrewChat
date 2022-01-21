@@ -19,15 +19,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        String contextPath = "/crewchat";
         http.csrf().disable();
 
         http.formLogin()
-                .loginPage("/crewchat/sign-in") //로그인 Url
-                .defaultSuccessUrl("/crewchat", true)
-                .failureUrl("/crewchat") // 인가/인증에 문제시 로그인 화면으로 이동
-            .and()
+                .loginPage(contextPath + "/sign-in") //로그인 Url
+                .defaultSuccessUrl(contextPath, true)
+                .failureUrl(contextPath) // 인가/인증에 문제시 로그인 화면으로 이동
+                .and()
                 .logout()
-                .logoutSuccessUrl("/crewchat")
+                .logoutSuccessUrl(contextPath)
                 .invalidateHttpSession(true);
     }
 }

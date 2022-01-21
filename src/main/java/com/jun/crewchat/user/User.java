@@ -20,7 +20,7 @@ public class User {
     protected String email;
 
     @Column(nullable = false)
-    protected  String password;
+    protected String password;
 
     @Column(nullable = false)
     protected String name;
@@ -30,13 +30,13 @@ public class User {
     @Column(nullable = false)
     protected boolean fromSocial;
 
-    protected  boolean socialImg;
+    protected boolean socialImg;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default
     private Set<UserRole> roleSet = new HashSet<>();
 
-    public void addUserRole(UserRole userRole){
+    public void addUserRole(UserRole userRole) {
         roleSet.add(userRole);
     }
 }
