@@ -40,5 +40,6 @@ public class UserDetailService implements UserDetailsService {
         userDTO.setName(user.getName());
         userDTO.setFromSocial(user.isFromSocial());
         return  userDTO;
+
     }
 }
