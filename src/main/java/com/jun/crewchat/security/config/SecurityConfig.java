@@ -1,5 +1,7 @@
 package com.jun.crewchat.security.config;
 
+import com.jun.crewchat.define.EUrl;
+import com.jun.crewchat.define.EUserRole;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,17 +21,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        String contextPath = "/crewchat";
+        String contextPath = EUrl.DEFAULT_URL.getUrl();
         http.csrf().disable();
 
-        http.formLogin()
-                .loginPage(contextPath + "/sign-in") //로그인 Url
-                .defaultSuccessUrl(contextPath, true)
-                .failureUrl(contextPath) // 인가/인증에 문제시 로그인 화면으로 이동
-                .and()
+        http.authorizeRequests()
+                .antMatchers(contextPath+"/sign").permitAll()
+                .antMatchers(contextPath).hasRole(EUserRole.USER.name())
+            .and()
+                .formLogin()
+                .loginPage(contextPath+"/sign")
+                .defaultSuccessUrl(contextPath)
+                .failureUrl(contextPath+"/sign")
+            .and()
                 .logout()
-                .logoutSuccessUrl(contextPath)
-                .invalidateHttpSession(true);
-        http.oauth2Login();
+                .logoutSuccessUrl(contextPath+"/sign")
+                .invalidateHttpSession(true)
+            .and()
+                .oauth2Login()// 로그인 시에 OAuth 를 사용한 로그인이 가능하도록
+                .loginPage(contextPath+"/sign")
+                .failureUrl(contextPath) // 인가/인증에 문제시 로그인 화면으로 이동
+                .defaultSuccessUrl(contextPath, true);
     }
 }

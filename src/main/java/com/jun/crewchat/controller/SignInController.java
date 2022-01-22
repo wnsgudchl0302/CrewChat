@@ -17,7 +17,11 @@ public class SignInController {
 
     private final UserService userService;
 
-    @GetMapping({"", "/"})
+    @GetMapping({"","/"})
+    public String sign(){
+        return userService.sign();
+    }
+    @GetMapping({ "/sign"})
     public String signIn(@AuthenticationPrincipal AuthUserDTO authUserDTO) {
         return userService.signIn(authUserDTO);
     }

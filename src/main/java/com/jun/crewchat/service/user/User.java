@@ -1,5 +1,6 @@
 package com.jun.crewchat.service.user;
 
+import com.jun.crewchat.define.EUserRole;
 import com.jun.crewchat.service.base.DefaultEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,10 +38,12 @@ public class User extends DefaultEntity {
 
     protected boolean socialImg;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    private Set<UserRole> roleSet = new HashSet<>();
+    protected String socialType;
 
-    public void addUserRole(UserRole userRole) {
-        roleSet.add(userRole);
+    @ElementCollection(fetch = FetchType.LAZY)
+    private Set<EUserRole> roleSet = new HashSet<>();
+
+    public void addUserRole(EUserRole EUserRole) {
+        roleSet.add(EUserRole);
     }
 }

@@ -2,16 +2,16 @@ package com.jun.crewchat.security.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
 import java.util.Map;
 
 @Getter
 @Setter
-public class AuthUserDTO extends User {
+public class AuthUserDTO extends User implements OAuth2User {
 
     private String email;
 
@@ -28,5 +28,10 @@ public class AuthUserDTO extends User {
         this.email = username;
         this.password = password;
         this.fromSocial = fromSocial;
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return this.attr;
     }
 }

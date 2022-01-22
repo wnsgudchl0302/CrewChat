@@ -2,6 +2,7 @@ package com.jun.crewchat.service.user;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.jun.crewchat.define.EUserRole;
 import com.jun.crewchat.security.dto.AuthUserDTO;
 
 import org.springframework.validation.BindingResult;
@@ -24,8 +25,12 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
 
+    public String sign() {
+        return "/main";
+    }
+
     public String signIn(AuthUserDTO authUserDTO) {
-        return authUserDTO != null ? "main.html" : "sign.html";
+        return authUserDTO != null ? "redirect:/crewchat" : "sign";
     }
 
     public String signUp(UserDTO userDTO, BindingResult bindingResult) {
@@ -36,7 +41,7 @@ public class UserService {
         if (bindingResult.hasErrors() || result.isPresent()) {
             return validationResponse;
         }
-        userDTO.addUserRole(UserRole.USER);
+        userDTO.addUserRole(EUserRole.USER);
         UserEntity userEntity = modelMapper.map(userDTO, UserEntity.class);
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
         userRepository.save(userEntity);

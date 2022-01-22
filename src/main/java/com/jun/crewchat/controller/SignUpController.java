@@ -23,9 +23,4 @@ public class SignUpController {
     public String signUp(@RequestBody @Validated UserDTO userDTO, BindingResult bindingResult) {
        return userService.signUp(userDTO, bindingResult);
     }
-
-    @PostMapping("/kakao-login")
-    public void kakao() {
-
-    }
 }
