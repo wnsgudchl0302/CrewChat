@@ -1,8 +1,6 @@
 package com.jun.crewchat.security.service;
 
 import com.jun.crewchat.security.dto.AuthUserDTO;
-import com.jun.crewchat.service.user.User;
-import com.jun.crewchat.service.user.UserDTO;
 import com.jun.crewchat.service.user.UserEntity;
 import com.jun.crewchat.service.user.UserRepository;
 import lombok.RequiredArgsConstructor;
