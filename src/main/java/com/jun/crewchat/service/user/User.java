@@ -28,7 +28,7 @@ public class User extends DefaultEntity {
     protected String email;
 
     @Column(nullable = false)
-    @NotBlank(message = "닉네임은 필수 입력 값입니다.")
+    @NotBlank(message = "이름은 필수 입력 값입니다.")
     protected String name;
 
     protected String profileImg;

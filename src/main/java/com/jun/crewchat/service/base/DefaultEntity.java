@@ -29,27 +29,28 @@ import java.time.LocalDateTime;
 public class DefaultEntity {
     private static ObjectMapper mapper;
 
-    @Column(updatable = false)
-    private String regId;
-
-    @Column(updatable = false)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime regDt;
+    @Column(name = "regDate", updatable = false)
+    private LocalDateTime regDate;
 
-    @Column(updatable = false)
-    protected String regDay;
-
-    @Column
-    private String modId;
-
-    @Column
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime modDt;
+    @Column(name = "modDate")
+    private LocalDateTime modDate;
+
+    @PrePersist
+    public void prePersist() {
+        regDate = regDate != null ? regDate : LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        modDate = modDate != null ? modDate : LocalDateTime.now();
+    }
 
     protected static ObjectMapper getObjectMapper() {
-        if(mapper == null) {
+        if (mapper == null) {
             mapper = new ObjectMapper();
             mapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
