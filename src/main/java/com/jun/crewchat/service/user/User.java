@@ -1,10 +1,5 @@
 package com.jun.crewchat.service.user;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.jun.crewchat.service.base.DefaultEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +8,9 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,12 +23,12 @@ import java.util.Set;
 public class User extends DefaultEntity {
 
     @Id
+    @NotBlank(message = "이메일은 필수 입력 값입니다.")
+    @Email(message = "이메일 형식에 맞지 않습니다.")
     protected String email;
 
     @Column(nullable = false)
-    protected String password;
-
-    @Column(nullable = false)
+    @NotBlank(message = "닉네임은 필수 입력 값입니다.")
     protected String name;
 
     protected String profileImg;

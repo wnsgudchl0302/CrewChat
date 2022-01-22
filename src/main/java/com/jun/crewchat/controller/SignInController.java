@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,17 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/crewchat")
-public class SignController {
+public class SignInController {
 
     private final UserService userService;
 
     @GetMapping({"", "/"})
-    public String test(@AuthenticationPrincipal AuthUserDTO authUserDTO) {
+    public String signIn(@AuthenticationPrincipal AuthUserDTO authUserDTO) {
         return userService.signIn(authUserDTO);
     }
 
-    @PostMapping("/sign-up")
-    public String signUp(UserDTO userDTO) {
-        return userService.signUp(userDTO);
-    }
+
 }

@@ -2,6 +2,7 @@ package com.jun.crewchat.security.service;
 
 import com.jun.crewchat.security.dto.AuthUserDTO;
 import com.jun.crewchat.service.user.User;
+import com.jun.crewchat.service.user.UserDTO;
 import com.jun.crewchat.service.user.UserEntity;
 import com.jun.crewchat.service.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class UserDetailService implements UserDetailsService {
         if (result.isEmpty()) {
             throw new UsernameNotFoundException("Check Email or Social");
         }
-        User user = result.get();
+        UserEntity user = result.get();
 
         AuthUserDTO userDTO = new AuthUserDTO(
                 user.getEmail(),
