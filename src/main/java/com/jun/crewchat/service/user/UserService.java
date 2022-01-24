@@ -41,6 +41,8 @@ public class UserService {
     }
 
     public String signIn(AuthUserDTO authUserDTO) {
+        System.out.println("1111111111111");
+        System.out.println(authUserDTO);
         return authUserDTO != null ? "redirect:/crewchat" : "sign";
     }
 
