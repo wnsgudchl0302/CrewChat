@@ -43,8 +43,7 @@ public class UserService {
     }
 
     public String signUp(UserDTO userDTO, BindingResult bindingResult) {
-        Optional<UserEntity> result = userRepository.findByEmail(userDTO.getEmail(), userDTO.fromSocial);
-
+        Optional<UserEntity> result = userRepository.findByEmail(userDTO.getEmail(), true);
         String validationResponse = validation(bindingResult, result);
 
         if (bindingResult.hasErrors() || result.isPresent()) {
@@ -66,12 +65,12 @@ public class UserService {
                 validationMessage.addProperty(error.getField(), error.getDefaultMessage());
             }
             validationArray.add(validationMessage);
-            validationJsonObject.addProperty("isUser", true);
+            validationJsonObject.addProperty("isUser", result.isPresent());
             validationJsonObject.addProperty("validation", false);
             validationJsonObject.add("message", validationArray);
             return validationJsonObject.toString();
         }
-        validationJsonObject.addProperty("isUser", false);
+        validationJsonObject.addProperty("isUser", result.isPresent());
         validationJsonObject.addProperty("validation", true);
         validationJsonObject.add("message", null);
         return validationJsonObject.toString();

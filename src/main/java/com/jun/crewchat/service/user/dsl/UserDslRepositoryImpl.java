@@ -46,4 +46,19 @@ public class UserDslRepositoryImpl extends QuerydslRepositorySupport implements 
                 ))
                 .fetchFirst();
     }
+
+    @Override
+    public UserDTO getUserWhereEmail(String email) {
+        return jpaQueryFactory
+                .from(qUser)
+                .where(qUser.email.eq(email))
+                .select(Projections.bean(UserDTO.class,
+                        qUser.email
+                        , qUser.name
+                        , qUser.fromSocial
+                        , qUser.socialType
+                        , qUser.profileImg
+                ))
+                .fetchFirst();
+    }
 }

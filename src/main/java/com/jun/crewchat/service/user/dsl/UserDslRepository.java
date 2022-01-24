@@ -8,4 +8,5 @@ public interface UserDslRepository {
 
     List<UserDTO> getList(UserDTO dto);
     UserDTO getMyInfo(UserDTO dto);
+    UserDTO getUserWhereEmail(String email);
 }
