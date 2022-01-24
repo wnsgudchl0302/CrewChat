@@ -22,6 +22,7 @@ public class UserDslRepositoryImpl extends QuerydslRepositorySupport implements 
     public List<UserDTO> getList(UserDTO dto) {
         return jpaQueryFactory
                 .from(qUser)
+                .where(qUser.email.notIn(dto.getEmail()))
                 .select(Projections.bean(UserDTO.class,
                         qUser.email
                         , qUser.name
