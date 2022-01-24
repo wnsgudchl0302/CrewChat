@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.FieldError;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -24,6 +25,16 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
+
+    public List<UserDTO> getList(UserDTO dto){
+        log.info("DTO : " +dto);
+        return userRepository.getList(dto);
+    }
+
+    public UserDTO getMyInfo(UserDTO dto){
+        log.info("DTO : " +dto);
+        return userRepository.getMyInfo(dto);
+    }
 
     public String sign() {
         return "/main";

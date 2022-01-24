@@ -3,11 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div sec:authorize-expr="isAuthenticated()">
-    <h2 sec:authentication="name">Name</h2>
-    <a href="/logout" th:href="@{/logout}">Logout</a>
+    <h2 id="name" sec:authentication="name">Name</h2>
+    <a id="a" href="/logout" th:href="@{/logout}">Logout</a>
 </div>
 </body>
+<script th:inline="javascript">
+
+    $.ajax({
+        type : "POST",
+        url : "/crewchat/user/getList",
+        data : {email : $("#name").text()},
+        success : function(data){
+            console.log(data)
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown){
+            alert("통신 실패.")
+        }
+    });
+    $.ajax({
+        type : "POST",
+        url : "/crewchat/user/getMyInfo",
+        data : {email : $("#name").text()},
+        success : function(data){
+            console.log(data)
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown){
+            alert("통신 실패.")
+        }
+    });
+
+
+
+
+
+</script>
 </html>

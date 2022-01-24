@@ -22,16 +22,28 @@ public class UserDslRepositoryImpl extends QuerydslRepositorySupport implements 
     public List<UserDTO> getList(UserDTO dto) {
         return jpaQueryFactory
                 .from(qUser)
-                .where(
-                        qUser.email.eq(dto.getEmail())
-                        , qUser.name.eq(dto.getName())
-                        , qUser.fromSocial.eq(dto.isFromSocial())
-                )
                 .select(Projections.bean(UserDTO.class,
                         qUser.email
                         , qUser.name
                         , qUser.fromSocial
+                        , qUser.socialType
+                        , qUser.profileImg
                 ))
                 .fetch();
+    }
+
+    @Override
+    public UserDTO getMyInfo(UserDTO dto) {
+        return jpaQueryFactory
+                .from(qUser)
+                .where(qUser.email.eq(dto.getEmail()))
+                .select(Projections.bean(UserDTO.class,
+                        qUser.email
+                        , qUser.name
+                        , qUser.fromSocial
+                        , qUser.socialType
+                        , qUser.profileImg
+                ))
+                .fetchFirst();
     }
 }
