@@ -27,12 +27,10 @@ public class UserService {
     private final ModelMapper modelMapper;
 
     public List<UserDTO> getList(UserDTO dto){
-        log.info("DTO : " +dto);
         return userRepository.getList(dto);
     }
 
     public UserDTO getMyInfo(UserDTO dto){
-        log.info("DTO : " +dto);
         return userRepository.getMyInfo(dto);
     }
 
@@ -41,8 +39,6 @@ public class UserService {
     }
 
     public String signIn(AuthUserDTO authUserDTO) {
-        System.out.println("1111111111111");
-        System.out.println(authUserDTO);
         return authUserDTO != null ? "redirect:/crewchat" : "sign";
     }
 

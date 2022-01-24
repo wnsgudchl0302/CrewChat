@@ -35,8 +35,6 @@ public class OauthUserDetailService extends DefaultOAuth2UserService {
         Map<String, Object> attributes = super.loadUser(userRequest).getAttributes();
 
         String clientName = userRequest.getClientRegistration().getClientName();
-        log.info("123");
-        log.info(clientName);
         UserDTO dto = new UserDTO();
         if (clientName.equals(ESocialClient.GOOGLE.getName())) {
             String email = attributes.get("email").toString();
