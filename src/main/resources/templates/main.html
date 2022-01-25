@@ -9,6 +9,10 @@
 <div sec:authorize-expr="isAuthenticated()">
     <h2 id="name" sec:authentication="name">Name</h2>
     <a id="a" href="/logout" th:href="@{/logout}">Logout</a>
+
+    <ul id="search">
+
+    </ul>
 </div>
 </body>
 <script th:inline="javascript">
@@ -18,7 +22,9 @@
         url : "/crewchat/user/getList",
         data : {email : $("#name").text()},
         success : function(data){
-            console.log(data)
+            $.each(data, function(index, ele){
+                $("#search").append("<li data-email="+ele.email+">"+ele.email+"<button class='asd'>추가</button><button class='asdd'>수락</button></li>")
+            })
         },
         error : function(XMLHttpRequest, textStatus, errorThrown){
             alert("통신 실패.")
@@ -35,6 +41,40 @@
             alert("통신 실패.")
         }
     });
+
+    $("ul").on("click", ".asd", function (){
+        console.log("클릭")
+        console.log($(this).parent().data("email"))
+
+        $.ajax({
+            type : "POST",
+            url : "/crewchat/friendPost/requestFriend",
+            data : {sender : $("#name").text(), receiver : $(this).parent().data("email")},
+            success : function(data){
+                console.log(data)
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown){
+                alert("통신 실패.")
+            }
+        });
+    })
+
+    $("ul").on("click", ".asdd", function (){
+        console.log("클릭")
+        console.log($(this).parent().data("email"))
+
+        $.ajax({
+            type : "POST",
+            url : "/crewchat/friendPost/acceptFriend",
+            data : {sender : $(this).parent().data("email"), receiver : $("#name").text()},
+            success : function(data){
+                console.log(data)
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown){
+                alert("통신 실패.")
+            }
+        });
+    })
 
 
 

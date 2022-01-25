@@ -1,6 +1,5 @@
 package com.jun.crewchat.service.friendpost;
 
-import com.jun.crewchat.service.base.DTOKey;
 import com.jun.crewchat.service.base.DefaultEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +20,6 @@ import javax.persistence.MappedSuperclass;
 public class FriendPost extends DefaultEntity {
 
     @Id
-    @DTOKey("FPI")
     protected String friendPostId;
 
     @Column(nullable = false)
