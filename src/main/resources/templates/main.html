@@ -9,9 +9,8 @@
 <div sec:authorize-expr="isAuthenticated()">
     <h2 id="name" sec:authentication="name">Name</h2>
     <a id="a" href="/logout" th:href="@{/logout}">Logout</a>
-
     <ul id="search">
-
+        <h2>가입한 유저 목록</h2>
     </ul>
 </div>
 </body>
@@ -75,10 +74,5 @@
             }
         });
     })
-
-
-
-
-
 </script>
 </html>
