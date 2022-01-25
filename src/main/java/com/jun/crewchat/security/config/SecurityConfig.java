@@ -23,7 +23,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         String contextPath = EUrl.DEFAULT_URL.getUrl();
+
+        http.headers().frameOptions().sameOrigin();
         http.csrf().disable();
 
         http.authorizeRequests()
