@@ -32,6 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(contextPath+"/sign").permitAll()
                 .antMatchers(contextPath).hasRole(EUserRole.USER.name())
+                .antMatchers("/chat/rooms").hasRole(EUserRole.USER.name())
+                .antMatchers("/chat/room").hasRole(EUserRole.USER.name())
             .and()
                 .formLogin()
                 .loginPage(contextPath+"/sign")
