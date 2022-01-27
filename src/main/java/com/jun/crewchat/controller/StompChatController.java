@@ -2,12 +2,14 @@ package com.jun.crewchat.controller;
 
 import com.jun.crewchat.service.chatmessage.ChatMessageDTO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class StompChatController {
 
     private final SimpMessagingTemplate template; //특정 Broker로 메세지를 전달
@@ -18,11 +20,13 @@ public class StompChatController {
     @MessageMapping(value = "/chat/enter")
     public void enter(ChatMessageDTO message){
         message.setMessage(message.getWriter() + "님이 채팅방에 참여하였습니다.");
+        log.info(message.getWriter() + " : " + message.getMessage());
         template.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
     }
 
     @MessageMapping(value = "/chat/message")
     public void message(ChatMessageDTO message){
+        log.info(message.getWriter() + " : " + message.getMessage());
         template.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
     }
 }

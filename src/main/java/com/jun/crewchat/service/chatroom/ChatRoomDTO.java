@@ -4,7 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.springframework.web.socket.WebSocketSession;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -13,11 +16,6 @@ import java.util.UUID;
 @SuperBuilder
 public class ChatRoomDTO extends ChatRoom {
 
-    public static ChatRoomDTO create(String name){
-        ChatRoomDTO room = new ChatRoomDTO();
-
-        room.setRoomId(UUID.randomUUID().toString());
-        room.setName(name);
-        return room;
-    }
+    private String userId;
+    //private Set<WebSocketSession> sessions = new HashSet<>();
 }

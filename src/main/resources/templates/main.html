@@ -19,7 +19,19 @@
     <button class="btn btn-secondary">개설하기</button>
 
 </div>
+<div id="room-list">
+<ul id="room-list-ul">
 
+</ul>
+</div>
+<div id="room-chat">
+
+</div>
+<input type="text" id="msg" class="form-control">
+<div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" id="button-send">전송</button>
+</div>
+<a href="/chat/roomw?roomId=asd">asdsad</a>
 </body>
 <script th:inline="javascript">
 
@@ -84,48 +96,44 @@
 
     $.ajax({
         type : "POST",
-        url : "/crewchat/chatroom/rooms",
-        data : {},
+        url : "/crewchat/chatroom/getListWhereMyEmail",
+        data : {userId : [[${#authentication.principal.username}]]},
         success : function(data){
-            console.log("data")
-            console.log(data)
+            $.each(data, function(index, ele){
+                console.log(ele)
+                console.log(index)
+                $("#room-list-ul").append("<li><a href='chat/roomw?roomId="+ele.roomId+"'>"+ele.name+"</a></li>")
+               // $("#room-list-ul").append("<li data-id='"+ele.roomId+"'>"+ele.name+"</li>")
+            })
+
         },
         error : function(XMLHttpRequest, textStatus, errorThrown){
             alert("통신 실패.")
         }
     });
+    $("#room-list-ul").on("click", "li", function (){
+        console.log("클릭")
+        console.log($(this))
+        console.log($(this).data("id"))
+        console.log($(this)[0].data("id"))
+    })
 
-    var roomName = [[${roomName}]];
-
-    if(roomName != null)
-        alert(roomName + "방이 개설되었습니다.");
-
-    $(".btn-create").on("click", function (e){
-        e.preventDefault();
-
-        var name = $("input[name='name']").val();
-
-        if(name == "")
-            alert("Please write the name.")
-        else
-            $("form").submit();
-    });
 
     $("#room-div").on("click", ".btn", function (){
        console.log("개설하기 클릭")
         $.ajax({
             type : "POST",
-            url : "/crewchat/chatroom/room",
+            url : "/crewchat/chatroom/add",
             data : {name: $("#room-name").val()},
             success : function(data){
-                console.log("data")
-                console.log(data)
+                $("#room-list-ul").append("<li data-room-id='"+data.roomId+"' data-room-name='"+data.name+"' id='"+data.roomId+"'>"+data.name+"</li>")
             },
             error : function(XMLHttpRequest, textStatus, errorThrown){
                 alert("통신 실패.")
             }
         });
     })
+
 
 </script>
 </html>
