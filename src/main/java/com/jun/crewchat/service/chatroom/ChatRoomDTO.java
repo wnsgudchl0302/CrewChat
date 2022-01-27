@@ -16,6 +16,5 @@ import java.util.UUID;
 @SuperBuilder
 public class ChatRoomDTO extends ChatRoom {
 
-    private String userId;
-    //private Set<WebSocketSession> sessions = new HashSet<>();
+    private String email;
 }

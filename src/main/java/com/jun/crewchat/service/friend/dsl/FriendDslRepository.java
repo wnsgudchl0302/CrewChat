@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface FriendDslRepository {
 
-    List<FriendDTO> isFriend(String myEmail, String friendEmail);
+    List<FriendDTO> getListMyFriend(FriendDTO dto);
+    FriendDTO friendCheck(FriendDTO dto);
 }

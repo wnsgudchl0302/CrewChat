@@ -25,7 +25,7 @@ public class ChatRoom {
 
     @Id
     protected String roomId;
-    protected String name;
+    protected String roomName;
 
 
 

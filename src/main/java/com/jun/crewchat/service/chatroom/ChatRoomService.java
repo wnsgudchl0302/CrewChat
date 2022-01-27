@@ -40,7 +40,7 @@ public class ChatRoomService {
         ChatRoomUserEntity chatRoomUserEntity = ChatRoomUserEntity.builder()
                 .chatRoomUserId(GeneratorIDTools.getId("CHU"))
                 .roomId(chatRoomEntity.getRoomId())
-                .userId("ambirion0302@gmail.com")
+                .email("ambirion0302@gmail.com")
                 .build();
         chatRoomUserRepository.save(chatRoomUserEntity);
         return modelMapper.map(chatRoomEntity, ChatRoomDTO.class);

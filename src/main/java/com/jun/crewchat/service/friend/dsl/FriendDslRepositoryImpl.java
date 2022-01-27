@@ -19,16 +19,31 @@ public class FriendDslRepositoryImpl extends QuerydslRepositorySupport implement
     }
 
     @Override
-    public List<FriendDTO> isFriend(String myEmail, String friendEmail) {
+    public List<FriendDTO> getListMyFriend(FriendDTO dto) {
         return jpaQueryFactory
                 .from(qFriend)
                 .where(
-                        qFriend.myEmail.eq(myEmail).or(qFriend.myEmail.eq(friendEmail))
-                        , qFriend.friendEmail.eq(friendEmail).or(qFriend.friendEmail.eq(myEmail))
+                       qFriend.myEmail.eq(dto.getMyEmail())
+                )
+                .select(Projections.bean(FriendDTO.class,
+                        qFriend.friendId
+                        , qFriend.friendEmail
+                        , qFriend.myEmail
+                ))
+                .fetch();
+    }
+
+    @Override
+    public FriendDTO friendCheck(FriendDTO dto) {
+        return jpaQueryFactory
+                .from(qFriend)
+                .where(
+                        qFriend.myEmail.eq(dto.getMyEmail())
+                        , qFriend.friendEmail.eq(dto.getFriendEmail())
                 )
                 .select(Projections.bean(FriendDTO.class,
                         qFriend.friendId
                 ))
-                .fetch();
+                .fetchOne();
     }
 }

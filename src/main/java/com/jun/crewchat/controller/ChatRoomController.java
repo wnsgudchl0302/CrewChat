@@ -16,8 +16,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/crewchat/chatroom")
 public class ChatRoomController {
-    private final ChatRoomService chatRoomService;
 
+    private final ChatRoomService chatRoomService;
 
     //채팅방 목록 조회
     @PostMapping(value = "/getList")
@@ -27,6 +27,7 @@ public class ChatRoomController {
 
     @PostMapping(value = "/getListWhereMyEmail")
     public List<ChatRoomDTO> getListWhereMyEmail(ChatRoomDTO dto){
+        log.info(dto.getEmail());
         return chatRoomService.getListWhereMyEmail(dto);
     }
 
@@ -43,29 +44,8 @@ public class ChatRoomController {
     //채팅방 개설
     @PostMapping(value = "/add")
     public ChatRoomDTO add(ChatRoomDTO dto){
-        log.info("# Create Chat Room , name: " + dto.getName());
+        log.info("# Create Chat Room , name: " + dto.getRoomName());
         return chatRoomService.add(dto);
     }
-//
-//    @PostMapping(value = "/join")
-//    public ChatRoomDTO join(ChatRoomDTO dto){
-//        log.info("# Create Chat Room , name: " + dto.getName());
-//        return chatRoomService.join(dto);
-//    }
 
-    //채팅방 조회
-//    @GetMapping("/room")
-//    public void getRoom(String roomId, Model model){
-//
-//        log.info("# get Chat Room, roomID : " + roomId);
-//
-//        model.addAttribute("room", chatRoomService.findRoomById(roomId));
-//    }
-//    @PostMapping("/roomIn")
-//    public ChatRoomDTO getRoom(ChatRoomDTO dto){
-//
-//        log.info("# get Chat Room, roomID : " + dto.getRoomId());
-//
-//        return chatRoomService.findRoomById(dto.getRoomId());
-//    }
 }

@@ -30,7 +30,7 @@ public class ChatRoomDslRepositoryImpl extends QuerydslRepositorySupport impleme
 
                 .select(Projections.bean(ChatRoomDTO.class,
                         qChatRoom.roomId
-                        , qChatRoom.name
+                        , qChatRoom.roomName
                 ))
                 .fetch();
     }
@@ -40,13 +40,13 @@ public class ChatRoomDslRepositoryImpl extends QuerydslRepositorySupport impleme
         return jpaQueryFactory
                 .from(qChatRoom)
                 .where(
-                        qChatRoomUser.userId.eq(dto.getUserId())
+                        qChatRoomUser.email.eq(dto.getEmail())
                 )
                 .leftJoin(qChatRoomUser)
                 .on(qChatRoomUser.roomId.eq(qChatRoom.roomId))
                 .select(Projections.bean(ChatRoomDTO.class,
                         qChatRoom.roomId
-                        , qChatRoom.name
+                        , qChatRoom.roomName
                 ))
                 .fetch();
     }
@@ -56,16 +56,16 @@ public class ChatRoomDslRepositoryImpl extends QuerydslRepositorySupport impleme
         return jpaQueryFactory
                 .from(qChatRoom)
                 .where(
-                        qChatRoomUser.userId.eq(dto.getUserId())
+                        qChatRoomUser.email.eq(dto.getEmail())
                         , qChatRoom.roomId.eq(dto.getRoomId())
-                        , qChatRoom.name.eq(dto.getName())
+                        , qChatRoom.roomName.eq(dto.getRoomName())
                 )
                 .leftJoin(qChatRoomUser)
                 .on(qChatRoomUser.roomId.eq(qChatRoom.roomId))
                 .select(Projections.bean(ChatRoomDTO.class,
                         qChatRoom.roomId
-                        , qChatRoom.name
-                        , qChatRoomUser.userId
+                        , qChatRoom.roomName
+                        , qChatRoomUser.email
                 ))
                 .fetchFirst();
     }
@@ -80,7 +80,7 @@ public class ChatRoomDslRepositoryImpl extends QuerydslRepositorySupport impleme
 
                 .select(Projections.bean(ChatRoomDTO.class,
                         qChatRoom.roomId
-                        , qChatRoom.name
+                        , qChatRoom.roomName
                 ))
                 .fetchFirst();
     }

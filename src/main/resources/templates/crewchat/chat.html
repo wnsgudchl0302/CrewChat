@@ -40,12 +40,12 @@
     $.ajax({
         type : "POST",
         url : "/crewchat/chatroom/roomCheck",
-        data : {userId : username, roomId : roomId, name : roomName},
+        data : {email : username, roomId : roomId, roomName : roomName},
         success : function(data){
             console.log(data.roomId === roomId)
-            console.log(data.userId === username)
+            console.log(data.email === username)
             console.log(data.name === roomName)
-            if(data.roomId === roomId && data.userId === username && data.name === roomName){
+            if(data.roomId === roomId && data.email === username && data.roomName === roomName){
                 console.log("asdasd")
                 var sockJs = new SockJS("/stomp/chat");
                 //1. SockJS를 내부에 들고있는 stomp를 내어줌

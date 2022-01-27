@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/chat")
+@RequestMapping("/crewchat")
 @Slf4j
 public class TestController {
 
     private final ChatRoomService chatRoomRepository;
 
-    @GetMapping("/roomw")
+    @GetMapping("/chat")
     public void getRoom(String roomId, Model model){
 
         log.info("# get Chat Room, roomID : " + roomId);
@@ -30,6 +30,6 @@ public class TestController {
 
 
         model.addAttribute("roomId", roomId);
-        model.addAttribute("name", chatRoomRepository.getRoom(chatRoomDTO).getName());
+        model.addAttribute("name", chatRoomRepository.getRoom(chatRoomDTO).getRoomName());
     }
 }

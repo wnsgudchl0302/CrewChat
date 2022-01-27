@@ -24,5 +24,5 @@ public class ChatRoomUser {
 
     protected String roomId;
 
-    protected String userId;
+    protected String email;
 }
