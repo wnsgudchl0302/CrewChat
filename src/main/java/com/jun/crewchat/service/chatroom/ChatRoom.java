@@ -1,5 +1,6 @@
 package com.jun.crewchat.service.chatroom;
 
+import com.jun.crewchat.service.base.DefaultEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,12 +18,10 @@ import javax.persistence.MappedSuperclass;
 @NoArgsConstructor
 @Slf4j
 @SuperBuilder
-public class ChatRoom {
+public class ChatRoom extends DefaultEntity {
 
     @Id
     protected String roomId;
     protected String roomName;
-
-
-
+    protected boolean isGroup;
 }

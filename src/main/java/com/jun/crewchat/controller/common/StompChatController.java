@@ -1,4 +1,4 @@
-package com.jun.crewchat.controller;
+package com.jun.crewchat.controller.common;
 
 import com.jun.crewchat.service.chatmessage.ChatMessageDTO;
 import lombok.RequiredArgsConstructor;

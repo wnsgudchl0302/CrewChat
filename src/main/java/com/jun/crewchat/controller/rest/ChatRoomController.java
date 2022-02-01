@@ -1,5 +1,6 @@
-package com.jun.crewchat.controller;
+package com.jun.crewchat.controller.rest;
 
+import com.jun.crewchat.biz.ChatRoomBizService;
 import com.jun.crewchat.service.chatroom.ChatRoomDTO;
 import com.jun.crewchat.service.chatroom.ChatRoomService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.List;
 public class ChatRoomController {
 
     private final ChatRoomService chatRoomService;
+    private final ChatRoomBizService chatRoomBizService;
 
     //채팅방 목록 조회
     @PostMapping(value = "/getList")
@@ -45,6 +47,10 @@ public class ChatRoomController {
     public ChatRoomDTO add(ChatRoomDTO dto){
         log.info("# Create Chat Room , name: " + dto.getRoomName());
         return chatRoomService.add(dto);
+    }
+    @PostMapping(value = "/chatMyFriend")
+    public String chatMyFriend(ChatRoomDTO dto){
+        return chatRoomBizService.chatMyFriend(dto);
     }
 
 }

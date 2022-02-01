@@ -1,4 +1,4 @@
-package com.jun.crewchat.controller;
+package com.jun.crewchat.controller.common;
 
 import com.jun.crewchat.security.dto.AuthUserDTO;
 import com.jun.crewchat.service.user.UserService;
@@ -18,12 +18,10 @@ public class SignInController {
 
     @GetMapping({"/",""})
     public String sign(){
-        log.info("이거탐==============");
         return userService.sign();
     }
     @GetMapping({ "/sign"})
     public String signIn(@AuthenticationPrincipal AuthUserDTO authUserDTO) {
-        log.info("가나다라마바사아자팤타ㅠㅏ하=====");
         return userService.signIn(authUserDTO);
     }
 

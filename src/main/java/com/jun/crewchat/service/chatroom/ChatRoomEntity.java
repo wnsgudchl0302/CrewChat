@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "chatroom")
+@Table(name = "chat_room")
 @Getter
 @Setter
 @NoArgsConstructor

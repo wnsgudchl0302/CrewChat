@@ -20,22 +20,13 @@ public class FriendService {
         return friendRepository.getListMyFriend(dto);
     }
 
-    public FriendDTO add(FriendDTO dto) {
-        if(friendCheck(dto)){
-            FriendEntity friendEntity = modelMapper.map(dto, FriendEntity.class);
-            friendEntity.setFriendId(GeneratorIDTools.getId("F"));
-            return modelMapper.map(friendRepository.save(friendEntity), FriendDTO.class);
+    public void delete(FriendDTO dto) {
+        FriendDTO friendDTO = friendRepository.friendCheck(dto);
+
+        if(friendDTO != null){
+            friendRepository.deleteById(friendDTO.getFriendId());
         }
-        return new FriendDTO();
     }
 
-    private boolean friendCheck(FriendDTO dto){
 
-        if(friendRepository.friendCheck(dto)==null){
-            log.info(dto.getFriendId());
-            return true;
-        }
-        log.info(dto.getFriendId());
-        return false;
-    }
 }

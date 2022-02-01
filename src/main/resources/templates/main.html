@@ -8,40 +8,63 @@
 </head>
 <body>
 <div sec:authorize-expr="isAuthenticated()">
-    <h2 id="name" sec:authentication="name">Name</h2>
-    <a id="a" href="/logout" th:href="@{/logout}">Logout</a>
+<!--    <h2 id="name" sec:authentication="name">Name</h2>-->
 </div>
-<div>
-    <ul id="search">
-        <h2>회원 유저 목록</h2>
+<div style="border: black solid 1px">
+    <ul id="my-info">
+        <h2>내정보</h2>
     </ul>
 </div>
-<div>
+<div style="border: black solid 1px">
+    <ul id="search">
+        <h2>가입 유저 목록</h2>
+    </ul>
+</div>
+<div style="border: black solid 1px">
     <ul id="friend">
         <h2>친구 목록</h2>
     </ul>
 </div>
-<div id="room-div">
+<div style="border: black solid 1px" id="room-div">
+    <h2>채팅방 목록</h2>
     <input type="text" id="room-name" name="name" class="form-control">
     <button class="btn btn-secondary">개설하기</button>
+    <div id="room-list">
+        <ul id="room-list-ul">
 
+        </ul>
+    </div>
 </div>
-<div id="room-list">
-    <ul id="room-list-ul">
 
-    </ul>
-</div>
+<a style="font-size: 20px" id="a" href="/logout" th:href="@{/logout}">로그아웃</a>
 </body>
 <script th:inline="javascript">
 
+    //내 정보
+    $.ajax({
+        type: "POST",
+        url: "/crewchat/user/getMyInfo",
+        data: {email: [[${#authentication.principal.username}]]},
+        success: function (data) {
+
+            console.log(data)
+            $("#my-info").append("<li>이름 : "+data.name+" 이메일 : "+data.email+"</li>")
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("통신 실패.")
+        }
+    });
+
+    //가입 유저 목록
     $.ajax({
         type: "POST",
         url: "/crewchat/user/getList",
-        data: {email: $("#name").text()},
+        data: {email: [[${#authentication.principal.username}]]},
         success: function (data) {
 
             $.each(data, function (index, ele) {
-                $("#search").append("<li data-email=" + ele.email + ">" + ele.email + "<button data-friend-email=" + ele.email + " class='add-friend'>추가</button></li>")
+                $("#search").append("<li data-email=" + ele.email + "> 이름 : " + ele.name + " 이메일 : " + ele.email +
+                    "<button data-friend-email=" + ele.email + " class='add-friend'>친구 추가</button></li>")
             })
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -49,6 +72,7 @@
         }
     });
 
+    //내 친구 목록
     $.ajax({
         type: "POST",
         url: "/crewchat/friend/getListMyFriend",
@@ -56,7 +80,9 @@
         success: function (data) {
             $.each(data, function (index, ele) {
 
-                $("#friend").append("<li data-email=" + ele.friendEmail + ">" + ele.friendEmail + "</li>")
+                $("#friend").append("<li data-email=" + ele.friendEmail + "> 이름 : " + ele.name + " 이메일 : " + ele.friendEmail + "" +
+                    "<button style='background: yellow' data-friend-email=" + ele.friendEmail + " class='chat-friend'>채팅 하기</button>" +
+                    "<button data-friend-email=" + ele.friendEmail + " class='delete-friend'>친구 삭제</button></li>")
             })
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -64,20 +90,18 @@
         }
     });
 
-
+    //친구 추가
     $("ul").on("click", ".add-friend", function () {
-
         $.ajax({
             type: "POST",
             url: "/crewchat/friend/add",
             data: {myEmail: [[${#authentication.principal.username}]], friendEmail : $(this).data("friend-email")},
             success: function (data) {
-
                 if(data.friendId!=null){
-                    $("#friend").append("<li data-email=" + data.friendEmail + ">" + data.friendEmail + "</li>")
+                    $("#friend").append("<li data-email=" + data.friendEmail + "> 이름 : " + data.name + " 이메일 : " + data.friendEmail + "" +
+                        "<button style='background: yellow' data-friend-email=" + data.friendEmail + " class='chat-friend'>채팅 하기</button>" +
+                        "<button data-friend-email=" + data.friendEmail + " class='delete-friend'>친구 삭제</button></li>")
                 }
-
-
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("통신 실패.")
@@ -85,6 +109,42 @@
         });
     })
 
+    //친구 삭제
+    $("ul").on("click", ".delete-friend", function () {
+        $.ajax({
+            type: "POST",
+            url: "/crewchat/friend/delete",
+            data: {myEmail: [[${#authentication.principal.username}]], friendEmail : $(this).data("friend-email")},
+            success: function (data) {
+                if(data.friendId!=null){
+                    $("#friend").append("<li data-email=" + data.friendEmail + ">" + data.friendEmail + "</li>")
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("통신 실패.")
+            }
+        });
+    })
+
+    //친구와 채팅하기
+    $("ul").on("click", ".chat-friend", function () {
+        console.log($(this).data("friend-email"))
+        $.ajax({
+            type: "POST",
+            url: "/crewchat/chatroom/chatMyFriend",
+            data: {email: [[${#authentication.principal.username}]], friendEmail : $(this).data("friend-email")},
+            success: function (data) {
+                console.log(data)
+                location.replace("chat?roomId="+data);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("통신 실패.")
+            }
+        });
+    })
+
+
+    //나의 채팅방
     $.ajax({
         type: "POST",
         url: "/crewchat/chatroom/getListWhereMyEmail",

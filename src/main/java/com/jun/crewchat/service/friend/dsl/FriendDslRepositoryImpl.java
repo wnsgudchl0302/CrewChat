@@ -2,6 +2,8 @@ package com.jun.crewchat.service.friend.dsl;
 
 import com.jun.crewchat.service.friend.FriendDTO;
 import com.jun.crewchat.service.friend.QFriendEntity;
+import com.jun.crewchat.service.user.QUser;
+import com.jun.crewchat.service.user.QUserEntity;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
@@ -12,6 +14,7 @@ public class FriendDslRepositoryImpl extends QuerydslRepositorySupport implement
 
     private final JPAQueryFactory jpaQueryFactory;
     QFriendEntity qFriend = QFriendEntity.friendEntity;
+    QUserEntity qUser = QUserEntity.userEntity;
 
     public FriendDslRepositoryImpl(JPAQueryFactory jpaQueryFactory) {
         super(QFriendEntity.class);
@@ -25,10 +28,13 @@ public class FriendDslRepositoryImpl extends QuerydslRepositorySupport implement
                 .where(
                        qFriend.myEmail.eq(dto.getMyEmail())
                 )
+                .leftJoin(qUser)
+                .on(qUser.email.eq(qFriend.friendEmail))
                 .select(Projections.bean(FriendDTO.class,
                         qFriend.friendId
                         , qFriend.friendEmail
                         , qFriend.myEmail
+                        , qUser.name
                 ))
                 .fetch();
     }

@@ -1,5 +1,6 @@
-package com.jun.crewchat.controller;
+package com.jun.crewchat.controller.rest;
 
+import com.jun.crewchat.biz.FriendBizService;
 import com.jun.crewchat.service.friend.FriendDTO;
 import com.jun.crewchat.service.friend.FriendService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.List;
 public class FriendController {
 
     private final FriendService friendService;
+    private final FriendBizService friendBizService;
 
     @PostMapping("/getListMyFriend")
     public List<FriendDTO> getListMyFriend(FriendDTO dto){
@@ -25,6 +27,11 @@ public class FriendController {
 
     @PostMapping("/add")
     public FriendDTO add(FriendDTO dto){
-        return friendService.add(dto);
+        return friendBizService.add(dto);
+    }
+
+    @PostMapping("/delete")
+    public void delete(FriendDTO dto){
+        friendService.delete(dto);
     }
 }

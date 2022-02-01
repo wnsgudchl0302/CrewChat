@@ -1,5 +1,6 @@
 package com.jun.crewchat.service.chatroomuser;
 
+import com.jun.crewchat.service.base.DefaultEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ import javax.persistence.MappedSuperclass;
 @NoArgsConstructor
 @Slf4j
 @SuperBuilder
-public class ChatRoomUser {
+public class ChatRoomUser extends DefaultEntity {
 
     @Id
     protected String chatRoomUserId;

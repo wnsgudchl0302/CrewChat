@@ -12,4 +12,5 @@ import lombok.experimental.SuperBuilder;
 public class ChatRoomDTO extends ChatRoom {
 
     private String email;
+    private String friendEmail;
 }

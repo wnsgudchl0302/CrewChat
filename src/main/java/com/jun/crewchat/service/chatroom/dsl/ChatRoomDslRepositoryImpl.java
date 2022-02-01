@@ -50,6 +50,23 @@ public class ChatRoomDslRepositoryImpl extends QuerydslRepositorySupport impleme
     }
 
     @Override
+    public List<ChatRoomDTO> getListRoomCheck(String myEmail, String friendEmail) {
+        return jpaQueryFactory
+                .from(qChatRoom)
+                .where(
+                        qChatRoomUser.email.eq(myEmail).or(qChatRoomUser.email.eq(friendEmail))
+                        , qChatRoom.isGroup.eq(false)
+                )
+                .leftJoin(qChatRoomUser)
+                .on(qChatRoomUser.roomId.eq(qChatRoom.roomId))
+                .select(Projections.bean(ChatRoomDTO.class,
+                        qChatRoom.roomId
+                        , qChatRoom.roomName
+                ))
+                .fetch();
+    }
+
+    @Override
     public ChatRoomDTO roomCheck(ChatRoomDTO dto) {
         return jpaQueryFactory
                 .from(qChatRoom)

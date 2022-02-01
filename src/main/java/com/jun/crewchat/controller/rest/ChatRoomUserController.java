@@ -1,4 +1,4 @@
-package com.jun.crewchat.controller;
+package com.jun.crewchat.controller.rest;
 
 import com.jun.crewchat.service.chatroomuser.ChatRoomUserDTO;
 import com.jun.crewchat.service.chatroomuser.ChatRoomUserService;

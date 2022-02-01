@@ -10,4 +10,5 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class FriendDTO extends Friend{
+    private String name;
 }
