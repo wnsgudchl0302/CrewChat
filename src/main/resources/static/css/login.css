@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+   
+body {
+    margin: 0 auto;
+}
+   
+.login-form {
+    width: 400px;
+    margin: 180px auto;
+    padding: 60px 70px;
+    text-align: center;
+    border: 1px solid #dbdbdb;
+}
+
+.login-form  form input::placeholder {
+    color: rgb(211, 211, 211);
+    font-weight: bold;
+}
+
+.login-form .login-title {
+    font-family: 'NanumSquare', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    padding: 30px 0;
+}
+   
+.login-form .text-field {
+    font-size: 14px;
+    padding: 10px;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #dbdbdb;
+    background-color: transparent;
+    width: 260px;
+    margin-top: 10px;
+}
+
+.login-form .text-field:hover, .login-form .text-field:focus{
+    border-bottom: 2px solid #1fad91;
+}
+
+.login-form .submit-btn {
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 14px;
+    width: 260px;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1f85ad;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.login-form .login-line {
+    display: block;
+    width: 258px;
+    height: 1px;
+    background-color: #dbdbdb;
+    margin: 8px 0;
+}
+
+.login-form .submit-btn-kakao img {
+    width: 260px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.login-form .submit-btn-google img {
+    width: 260px;
+    cursor: pointer;
+}
+
+.login-form .login-links {
+    text-align: left;
+    padding-top: 10px;
+}
+ 
+.login-form .login-links a {
+  font-size: 12px;
+  color: #2b2b2b;
+  text-decoration: none;
+}
+
+.login-form .login-links .login-find {
+    padding-left: 86px;
+}
