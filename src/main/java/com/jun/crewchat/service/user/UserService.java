@@ -38,7 +38,7 @@ public class UserService {
     }
 
     public String signUp(){
-        return "signUp";
+        return "signup";
     }
 
     public String signIn(AuthUserDTO authUserDTO) {

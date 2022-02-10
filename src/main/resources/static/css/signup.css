@@ -19,15 +19,11 @@
     margin: 20px 0;
 }
 
-.signup-form .idwrap {
-    margin-top: 20px;
-}
-
 .signup-form .passwordwrap {
     margin: 20px 0;
 }
 
-.signup-form .password-checkwrap, .signup-form .namewrap, .signup-form .emailwrap{
+.signup-form .password-checkwrap, .signup-form .namewrap {
     margin-bottom: 20px;
 }
 

@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org/%22%3E">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>로그인 창</title>
     <link th:href="@{/css/login.css}" rel="stylesheet" />
     <link th:href="@{/css/common.css}" rel="stylesheet" />
 </head>
@@ -19,7 +19,7 @@
             <a href="/crewchat/oauth2/authorization/kakao" class="submit-btn-kakao"><img th:src="@{/img/pngegg (1).png}" alt=""><span>카카오 로그인</span></a>
             <a href="/crewchat/oauth2/authorization/google" class="submit-btn-google"><img th:src="@{/img/구글__2_100.png}" alt=""><span>구글 로그인</span></a>
             <div class="login-links">
-                <a th:href="@{/signup.html}" class="login-signup">회원가입</a>
+                <a th:href="@{/signUp}" class="login-signup">회원가입</a>
                 <a href="#" class="login-find" >아이디 | 비밀번호 찾기</a>
             </div>
         </div>
