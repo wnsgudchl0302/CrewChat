@@ -1,21 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
-@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
-
-* {
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
-   
-body {
-    margin: 0 auto;
-}
-   
 .login-form {
     width: 400px;
     margin: 180px auto;
     padding: 60px 70px;
     text-align: center;
     border: 1px solid #dbdbdb;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .login-form  form input::placeholder {
@@ -39,10 +28,12 @@ body {
     background-color: transparent;
     width: 260px;
     margin-top: 10px;
+    transition-duration: .5s;
 }
 
-.login-form .text-field:hover, .login-form .text-field:focus{
-    border-bottom: 2px solid #1fad91;
+.login-form .text-field:focus{
+    transition-duration: .5s;
+    border-bottom: 2px solid #1f85ad;
 }
 
 .login-form .submit-btn {
@@ -63,19 +54,60 @@ body {
     display: block;
     width: 258px;
     height: 1px;
+    border-radius: 5px;
     background-color: #dbdbdb;
     margin: 8px 0;
 }
 
-.login-form .submit-btn-kakao img {
+.login-form .submit-btn-kakao {
+    position: relative;
+    display: block;
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 18px;
     width: 260px;
+    padding: 15px;
     margin: 10px 0;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: #fee500;
+    color: #3c1e1e;
+    cursor: pointer;
+}
+
+.login-form .submit-btn-kakao img {
+    position: absolute;
+    width: 28px;
+    top: 16px;
+    left: 22px;
+}
+
+.login-form .submit-btn-kakao span {
+    margin-left: 36px;
+}
+
+.login-form .submit-btn-google {
+    position: relative;
+    display: block;
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 18px;
+    width: 260px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #000;
     cursor: pointer;
 }
 
 .login-form .submit-btn-google img {
-    width: 260px;
-    cursor: pointer;
+    position: absolute;
+    width: 30px;
+    top: 13px;
+    left: 20px;
+}
+
+.login-form .submit-btn-google span {
+    margin-left: 18px;
 }
 
 .login-form .login-links {
@@ -91,4 +123,8 @@ body {
 
 .login-form .login-links .login-find {
     padding-left: 86px;
+}
+
+.login-form .login-links .login-signup {
+    color: #1f85ad;
 }
