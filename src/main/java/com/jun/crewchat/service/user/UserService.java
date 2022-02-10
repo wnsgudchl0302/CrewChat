@@ -37,6 +37,10 @@ public class UserService {
         return "main";
     }
 
+    public String signUp(){
+        return "signUp";
+    }
+
     public String signIn(AuthUserDTO authUserDTO) {
         return authUserDTO != null ? "redirect:/" : "sign";
     }
