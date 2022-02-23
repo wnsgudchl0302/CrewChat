@@ -5,6 +5,7 @@
     <title>회원가입창</title>
     <link th:href="@{/css/signup.css}" rel="stylesheet" />
     <link th:href="@{/css/common.css}" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
     <section class="wrap">
@@ -26,7 +27,7 @@
                 <input type="text" name="name" id="name" class="text-field" placeholder="이름" autocomplete="off">
                 <span class="error-check"></span>
             </div>
-            <button value="가입" class="submit-btn" >가입</button>
+            <button id="submit-btn" value="가입" class="submit-btn" >가입</button>
             <a th:href="@{/}" class="link">로그인화면으로</a>
         </div>
     </section>

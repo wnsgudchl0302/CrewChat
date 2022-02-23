@@ -160,3 +160,29 @@ function allOk(ok1, ok2, ok3, ok4) {
         return false;
     }
 }
+
+console.log($("#email").val())
+$(".signup-form").on("click","#submit-btn", function(){
+    console.log("버튼 클릭")
+})
+$("#submit-btn").click(function(){
+    console.log("클릭")
+    var param = {
+        email  : $("#email").val(),
+        password : $("#password1").val(),
+        name : $("#name").val()
+    }
+    $.ajax({
+        type:"POST",
+        contentType: 'application/json',
+        url:"/crewchat/user/sign-up",
+        data : JSON.stringify(param),
+        success :function(data){
+            //로그인 창으로 돌아가기 기능
+            console.log("성공")
+        },
+        error:function(){
+
+        }
+    })
+})
